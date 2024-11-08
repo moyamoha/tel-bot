@@ -1,3 +1,13 @@
 aws:
   access_key_id: ${AWS_ACCESS_KEY_ID}
   secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+db:
+  url: ${DB_URL}
+  connections:
+    for_bot_app: bot_db_connection
+
+telegram:
+  bots:
+    ya_hussain_313:
+      token: ${TELEGRAM_BOTS_YA_HUSSAIN_313_TOKEN}
+      username: ${TELEGRAM_BOTS_YA_HUSSAIN_313_USERNAME}
