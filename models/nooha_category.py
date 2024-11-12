@@ -9,6 +9,3 @@ class NoohaCategory(Model):
 
     class Meta:
         table = "nooha_category"
-
-    def __repr__(self):
-        return f"({self.id}, {self.category_id}, {self.nooha_id})"

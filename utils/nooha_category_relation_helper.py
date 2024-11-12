@@ -26,6 +26,7 @@ async def create_nooha_categories(nooha: Nooha, categories: list[int] | None = N
             nc = NoohaCategory(nooha=nooha, category=category)
             await nc.save()
             added_category_ids.append(_id)
+    return added_category_ids
 
 def nooha_orm_to_nooha_response(nooha: Nooha, categories: list[int] = []):
     result = NoohaResponse(

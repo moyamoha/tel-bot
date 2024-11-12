@@ -31,7 +31,7 @@ async def start(
                     await update.message.reply_document(document=url)
     else:
         try:
-            categories = await Category.all()
+            categories = await Category.all().order_by('title')
             keyboard = []
             for c in categories:
                 keyboard.append(

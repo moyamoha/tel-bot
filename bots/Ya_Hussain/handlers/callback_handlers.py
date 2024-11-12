@@ -23,7 +23,7 @@ async def list_noohas(
     # Extract URL from callback data
     category_title = query.data.split(':')[1]
     category = await Category.get(title=category_title)
-    noohas = await Nooha.filter(categories=category).prefetch_related('categories')
+    noohas = await Nooha.filter(categories=category).prefetch_related('categories').order_by('title')
     text = f"نوحه ها و مداحی های با موضوع <strong>{category_title}:</strong>\n\n"
     for i, n in enumerate(noohas):
         # title = escape_markdown(n.title)

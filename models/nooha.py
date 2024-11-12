@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, constr
 from tortoise.models import Model
 from tortoise import fields
+from pydantic.types import StringConstraints
 from datetime import datetime
-from typing import Union, Optional
-
+from typing import Union, Optional, Annotated
+from re import RegexFlag
 
 class Nooha(Model):
     id = fields.IntField(primary_key=True)
@@ -28,13 +29,13 @@ class NoohaResponse(BaseModel):
 
 
 class NoohaCreate(BaseModel):
-    title: str
-    authors: str
+    title: str = Field(min_length=5)
+    authors: str = Field(min_length=5)
     categories: Optional[list[int]] = None
 
 
 class NoohaEdit(BaseModel):
-    title: Optional[str] = None
-    authors: Optional[str] = None
+    title: Optional[Annotated[str, StringConstraints(min_length=5)]] = None
+    authors: Optional[Annotated[str, StringConstraints(min_length=5)]] = None
     categories: Optional[list[int]] = None
     

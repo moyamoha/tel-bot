@@ -10,6 +10,7 @@ from utils.nooha_category_relation_helper import create_nooha_categories, \
     edit_nooha_categories, \
     nooha_orm_to_nooha_response, \
     bulk_nooha_orm_to_nooha_response
+from tortoise.expressions import Q
 
 
 router = APIRouter(prefix="/noohas", tags=["Noohas"])
@@ -22,7 +23,6 @@ async def create_nooha(nooha: NoohaCreate):
     n = await Nooha.create(**nooha_as_dict)
     added_category_ids = await create_nooha_categories(n, categories=category_ids)
     await n.save()
-    await Nooha
     return nooha_orm_to_nooha_response(n, categories=added_category_ids)
 
 @router.put('/upload/{id}')
@@ -39,15 +39,24 @@ async def upload_nooha(id: int, file: UploadFile):
         print(e)
 
 @router.get("/", response_model=list[NoohaResponse])
-async def get_noohas(category_title: Union[str, None] = None):
+async def get_noohas(
+        category_title: Union[str, None] = None,
+        search: str = "",
+        page: int = 1,
+        per_page: int = 20
+    ):
+    offset = (page - 1) * per_page
     if not category_title:
-        noohas = await Nooha.all()
+        noohas = await Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search)).offset(offset).limit(per_page)
         return await bulk_nooha_orm_to_nooha_response(noohas)
     else:
         category = await Category.get_or_none(title=category_title)
         if not category:
             raise HTTPException(404, detail=f'{category_title} was not found')
-        noohas = await Nooha.filter(categories=category).prefetch_related('categories')
+        noohas = await Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search), categories=category)\
+                        .prefetch_related('categories')\
+                        .offset(offset)\
+                        .limit(per_page)
         return await bulk_nooha_orm_to_nooha_response(noohas)
 
 @router.get("/{id}")
