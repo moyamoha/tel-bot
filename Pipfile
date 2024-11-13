@@ -76,7 +76,7 @@ yarl = "==1.17.1"
 dotmap = "*"
 
 [scripts]
-web = "uvicorn --reload main:app"
+web = "uvicorn --host 0.0.0.0  --reload main:app"
 bot = "python start_bot.py"
 
 [dev-packages]

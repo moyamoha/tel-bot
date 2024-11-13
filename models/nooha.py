@@ -27,6 +27,10 @@ class NoohaResponse(BaseModel):
     uploaded_at:  Union[datetime, None] = None
     categories: list[int] = []
 
+class NoohaListResponse(BaseModel):
+    total_count: int
+    items: list[NoohaResponse]
+
 
 class NoohaCreate(BaseModel):
     title: str = Field(min_length=5)

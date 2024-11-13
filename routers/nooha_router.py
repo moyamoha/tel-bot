@@ -1,7 +1,6 @@
 from fastapi.routing import APIRouter
 from fastapi import status, UploadFile, HTTPException
-from models.nooha import Nooha, NoohaCreate, NoohaEdit, NoohaResponse
-from models.category import Category
+from models.nooha import Nooha, NoohaCreate, NoohaEdit, NoohaResponse, NoohaListResponse
 from models.nooha_category import NoohaCategory
 from di_container import AppContainer
 from datetime import datetime
@@ -9,7 +8,7 @@ from typing import Union
 from utils.nooha_category_relation_helper import create_nooha_categories, \
     edit_nooha_categories, \
     nooha_orm_to_nooha_response, \
-    bulk_nooha_orm_to_nooha_response
+    bulk_nooha_or_to_nooha_list
 from tortoise.expressions import Q
 
 
@@ -38,7 +37,7 @@ async def upload_nooha(id: int, file: UploadFile):
     except Exception as e:
         print(e)
 
-@router.get("/", response_model=list[NoohaResponse])
+@router.get("/", response_model=NoohaListResponse)
 async def get_noohas(
         category_title: Union[str, None] = None,
         search: str = "",
@@ -47,17 +46,16 @@ async def get_noohas(
     ):
     offset = (page - 1) * per_page
     if not category_title:
-        noohas = await Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search)).offset(offset).limit(per_page)
-        return await bulk_nooha_orm_to_nooha_response(noohas)
+        noohas_q = Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search))
+        count = await noohas_q.count()
+        noohas = await noohas_q.offset(offset).limit(per_page)
+        return await bulk_nooha_or_to_nooha_list(count, noohas)
     else:
-        category = await Category.get_or_none(title=category_title)
-        if not category:
-            raise HTTPException(404, detail=f'{category_title} was not found')
-        noohas = await Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search), categories=category)\
-                        .prefetch_related('categories')\
-                        .offset(offset)\
-                        .limit(per_page)
-        return await bulk_nooha_orm_to_nooha_response(noohas)
+        noohas_q = Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search), categories__title=category_title)\
+                        .prefetch_related('categories')
+        count = await noohas_q.count()
+        noohas = await noohas_q.offset(offset).limit(per_page)
+        return await bulk_nooha_or_to_nooha_list(count, noohas)
 
 @router.get("/{id}")
 async def get_single_nooha(id: int, response_model=NoohaResponse):

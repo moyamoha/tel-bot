@@ -1,5 +1,5 @@
 from models.nooha_category import NoohaCategory
-from models.nooha import Nooha, NoohaResponse
+from models.nooha import Nooha, NoohaResponse, NoohaListResponse
 from models.category import Category
 from typing import Sequence
 
@@ -41,9 +41,9 @@ def nooha_orm_to_nooha_response(nooha: Nooha, categories: list[int] = []):
     )
     return result
 
-async def bulk_nooha_orm_to_nooha_response(data: list[Nooha]):
+async def bulk_nooha_or_to_nooha_list(count: int, data: list[Nooha]):
     result = []
     for n in data:
         relations = await NoohaCategory.filter(nooha_id=n.id)
         result.append(nooha_orm_to_nooha_response(n, categories=[rel.category_id for rel in relations]))
-    return result
+    return NoohaListResponse(total_count=count, items=result)
