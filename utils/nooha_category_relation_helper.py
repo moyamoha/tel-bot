@@ -6,7 +6,7 @@ from typing import Sequence
 
 async def edit_nooha_categories(nooha: Nooha, categories: list[int] | None = None):
     if categories is not None:
-        relations = await NoohaCategory.filter(nooha_id=id)
+        relations = await NoohaCategory.filter(nooha_id=nooha.id)
         for rel in relations:
             await rel.delete()
         for _id in categories:

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from tortoise.models import Model
 from tortoise import fields
 from typing import Union
@@ -20,7 +20,7 @@ class CategoryResponse(BaseModel):
 
 
 class CreateCategory(BaseModel):
-    title: str
+    title: str = Field(min_length=5)
 
 class EditCategory(CreateCategory):
     pass

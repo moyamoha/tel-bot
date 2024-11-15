@@ -64,7 +64,7 @@ async def get_single_nooha(id: int, response_model=NoohaResponse):
     # print(relations)
     return nooha_orm_to_nooha_response(nooha, categories=[rel.category_id for rel in relations])
 
-@router.put("/{id}", status_code=status.HTTP_200_OK, response_model=NoohaResponse)
+@router.put("/{id}", status_code=status.HTTP_200_OK)
 async def edit_nooha(id: int, nooha: NoohaEdit):
     n = await Nooha.get(id=id)
     await edit_nooha_categories(n, nooha.categories)
@@ -74,7 +74,6 @@ async def edit_nooha(id: int, nooha: NoohaEdit):
     await n.update_from_dict(update_data)
     n.updated_at = datetime.now()
     await n.save()
-    return n
 
 
 
