@@ -57,8 +57,8 @@ async def get_noohas(
         noohas = await noohas_q.offset(offset).limit(per_page)
         return await bulk_nooha_or_to_nooha_list(count, noohas)
 
-@router.get("/{id}")
-async def get_single_nooha(id: int, response_model=NoohaResponse):
+@router.get("/{id}", response_model=NoohaResponse)
+async def get_single_nooha(id: int):
     nooha = await Nooha.get(id=id)
     relations = await NoohaCategory.filter(nooha=nooha)
     # print(relations)
