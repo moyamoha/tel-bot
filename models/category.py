@@ -17,6 +17,7 @@ class CategoryResponse(BaseModel):
     title: str
     created_at: datetime
     updated_at: Union[datetime, None] = None
+    naoha_count: int
 
 
 class CreateCategory(BaseModel):

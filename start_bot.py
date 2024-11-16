@@ -9,7 +9,7 @@ BOT_DB_CONNECTION_NAME: Final = "bot_db_conn"
 
 def start_bot():
     app = create_yahya_salimi_bot()
-    print('BOT @Ya_Hussain_bot is running ...')
+    print('BOT @Ya_Hussain_313_bot is running ...')
     app.run_polling()
 
 if __name__ == '__main__':

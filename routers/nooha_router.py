@@ -61,7 +61,6 @@ async def get_noohas(
 async def get_single_nooha(id: int):
     nooha = await Nooha.get(id=id)
     relations = await NoohaCategory.filter(nooha=nooha)
-    # print(relations)
     return nooha_orm_to_nooha_response(nooha, categories=[rel.category_id for rel in relations])
 
 @router.put("/{id}", status_code=status.HTTP_200_OK)

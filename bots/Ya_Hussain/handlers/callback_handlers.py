@@ -29,7 +29,6 @@ async def list_noohas(
         # title = escape_markdown(n.title)
         text += f"<a href='{bot_url}?start=get_nooha_{n.id}'>{i+1}: {n.title}</a>\n\n"
 
-    print(context._chat_id)
     await context.bot.send_message(
         update.effective_chat.id,
         text=text,
