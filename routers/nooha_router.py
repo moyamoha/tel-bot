@@ -39,19 +39,19 @@ async def upload_nooha(id: int, file: UploadFile):
 
 @router.get("/", response_model=NoohaListResponse)
 async def get_noohas(
-        category_title: Union[str, None] = None,
+        category_id: Union[int, None] = None,
         search: str = "",
         page: int = 1,
         per_page: int = 20
     ):
     offset = (page - 1) * per_page
-    if not category_title:
+    if not category_id:
         noohas_q = Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search))
         count = await noohas_q.count()
         noohas = await noohas_q.offset(offset).limit(per_page)
         return await bulk_nooha_or_to_nooha_list(count, noohas)
     else:
-        noohas_q = Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search), categories__title=category_title)\
+        noohas_q = Nooha.filter(Q(title__icontains=search) | Q(authors__icontains=search), categories__id=category_id)\
                         .prefetch_related('categories')
         count = await noohas_q.count()
         noohas = await noohas_q.offset(offset).limit(per_page)
