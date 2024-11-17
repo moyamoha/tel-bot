@@ -66,10 +66,11 @@ async def get_single_nooha(id: int):
 @router.put("/{id}", status_code=status.HTTP_200_OK)
 async def edit_nooha(id: int, nooha: NoohaEdit):
     n = await Nooha.get(id=id)
-    await edit_nooha_categories(n, nooha.categories)
-    update_data = {k: v for k, v in nooha.dict().items() if v is not None}
+    nooha_as_dict = nooha.model_dump()
+    await edit_nooha_categories(n, nooha_as_dict.pop('categories', None))
+    update_data = {k: v for k, v in nooha_as_dict.items() if v is not None}
     if not update_data:
-        raise HTTPException(status_code=400, detail="No valid fields to update")
+        return
     await n.update_from_dict(update_data)
     n.updated_at = datetime.now()
     await n.save()

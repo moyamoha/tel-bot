@@ -21,7 +21,7 @@ class CategoryResponse(BaseModel):
 
 
 class CreateCategory(BaseModel):
-    title: str = Field(min_length=5)
+    title: str = Field(min_length=3)
 
 class EditCategory(CreateCategory):
     pass
