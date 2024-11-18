@@ -1,0 +1,181 @@
+-- MariaDB dump 10.19  Distrib 10.9.3-MariaDB, for Win64 (AMD64)
+--
+-- Host: mysql-1a4462ae-salimiyahya549-5101.j.aivencloud.com    Database: defaultdb
+-- ------------------------------------------------------
+-- Server version	8.0.30
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`),
+  KEY `idx_category_title_f7fc03` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES
+(1,'نوحه','2024-11-07 13:40:09.976466','2024-11-17 11:18:44.941622'),
+(3,'محرم','2024-11-08 06:56:33.648382',NULL),
+(4,'فاطمیه','2024-11-12 07:35:35.805509',NULL),
+(5,'امام علی (علیه السلام)','2024-11-12 07:53:23.016108','2024-11-17 08:46:21.257809'),
+(6,'اربعین','2024-11-12 08:14:38.821113','2024-11-16 22:34:21.372419'),
+(8,'مقاومت و جهاد','2024-11-14 13:23:43.867590',NULL),
+(9,'ظهور حجت (عج)','2024-11-14 13:41:40.061320',NULL);
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nooha`
+--
+
+DROP TABLE IF EXISTS `nooha`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nooha` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `authors` longtext NOT NULL,
+  `aws_key` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) DEFAULT NULL,
+  `uploaded_at` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nooha`
+--
+
+LOCK TABLES `nooha` WRITE;
+/*!40000 ALTER TABLE `nooha` DISABLE KEYS */;
+INSERT INTO `nooha` VALUES
+(4,'نماهنگ راه زهرا','حسین طاهری','enc_17034243947009968179439.mp3','2024-11-07 13:44:33.407711','2024-11-14 08:48:10.464354',NULL),
+(5,'نحن جنود معسکر الحسین','حسین طاهری و محمد رضا طاهری','enc_17242537647732897417251.mp3','2024-11-07 13:45:07.533352','2024-11-14 09:50:40.646268',NULL),
+(15,'اشکای نم نم','ابوذر بیوکافی','enc_17303873004087247409097.mp3','2024-11-12 07:33:19.871254','2024-11-13 22:55:25.853789','2024-11-12 09:33:30.607796'),
+(16,'منکر تاریخ نشو','حسین طاهری','enc_16706923771344499325299.mp3','2024-11-12 07:36:15.212543','2024-11-17 00:18:24.415718','2024-11-12 09:36:28.844263'),
+(17,'نماهنگ مادر','سید علی مومنی','enc_17313646991279850549258.mp3','2024-11-12 07:38:31.971596',NULL,'2024-11-12 09:38:39.323682'),
+(18,'سلام فاطمه','محمد حسین پویانفر','enc_16704920669072276211589.mp3','2024-11-12 07:40:04.406055',NULL,'2024-11-12 09:40:15.137268'),
+(19,'همه کاره حیدر','سجاد محمدی','enc_16715649286773539727173(1).mp3','2024-11-12 07:45:46.045702',NULL,'2024-11-12 09:45:51.555753'),
+(20,'چادری که رو سر خواهرامونه','حسین طاهری','enc_16577561728291128123077.mp3','2024-11-12 07:47:50.521232',NULL,'2024-11-12 09:48:03.325284'),
+(21,'نماهنگ پناه','جواد پورعباسیان','enc_17313648726547087849210.mp3','2024-11-12 07:50:16.083623',NULL,'2024-11-12 09:50:22.267334'),
+(22,'نماهنگ با احترام بابا سلام','محمد حسین پویانفر','enc_16752080113540379593962.mp3','2024-11-12 07:54:46.594442','2024-11-13 22:56:47.289188','2024-11-12 09:54:56.302012'),
+(23,'نماهنگ یا علی مولا','حسن کاتب کربلایی','enc_17060532661458228975932.mp3','2024-11-12 07:59:01.744429',NULL,'2024-11-12 09:59:16.604545'),
+(24,'پدر خاک','گروه سرود آوای باران ','enc_17192236591063682655237.mp3','2024-11-12 08:00:34.817505',NULL,'2024-11-12 10:00:44.693959'),
+(25,'نماهنگ حبل المتین عالم','سید رضا نریمانی','enc_16884329963106115339841.mp3','2024-11-12 08:01:55.895724',NULL,'2024-11-12 10:02:07.225728'),
+(26,'نماهنگ حیدره باخ','حسین طاهری و مهدی رسولی و حنیف طاهری','enc_17190821382409725518808.mp3','2024-11-12 08:04:25.382589',NULL,'2024-11-12 10:04:41.894318'),
+(27,'حیدر حیدر','سید طالع باکویی','TalehBakooei-Heydar.mp3','2024-11-12 08:13:22.468663',NULL,'2024-11-12 10:13:37.978182'),
+(28,'اگه مردم چی','روح الله رحیمیان','Roohollah Rahimian - Age Mordam Chi (320).mp3','2024-11-12 08:16:29.444712','2024-11-13 23:09:16.789814','2024-11-12 10:16:38.566815'),
+(29,'نماهنگ تسبیحات حضرت زهرا','مهدی رسولی','16069275116433465386772.mp3','2024-11-14 06:43:12.623936',NULL,'2024-11-14 08:43:35.985919'),
+(30,'مادر، به تپش های دل حیدر','محمد حسین پویانفر','mohammad_hossein_pooyanfar_tapeshhay_del 128.mp3','2024-11-14 09:55:36.392525',NULL,'2024-11-14 11:55:48.286960'),
+(31,'یوم الانتقام','ابوذر روحی','enc_1697966886078013318426.mp3','2024-11-14 13:24:34.010033',NULL,'2024-11-14 15:24:47.686826'),
+(32,'نماهنگ وقت پیکاره','حسین طاهری','enc_17278548381693873535023.mp3','2024-11-14 13:26:36.820093',NULL,'2024-11-14 15:26:44.832779'),
+(33,'نماهنگ طوفان الاربعین','ابوذر روحی','enc_17234170716328704653490.mp3','2024-11-14 13:32:54.134677',NULL,'2024-11-14 15:33:07.313551'),
+(34,'نماهنگ مسیر سبز ظهور','کربلایی علیرضا حسینی','enc_1725036280777531192287.mp3','2024-11-14 13:43:19.853307',NULL,'2024-11-14 15:43:31.070280'),
+(35,'الی الله سفره الی الله','حیدر البیاتی','enc_1693305363390956140270.mp3','2024-11-14 13:47:16.036374',NULL,'2024-11-14 15:47:38.597713'),
+(36,'امان از دل زینب','نامعلوم','Afghani - Aman Az Dele Zeinab 128.mp3','2024-11-15 22:14:27.291158',NULL,'2024-11-16 00:14:46.901568'),
+(42,'سلام فرمانده','ابوذر روحی','Abozar Roohi - Salam Farmande (320).mp3','2024-11-17 09:20:07.472675',NULL,'2024-11-17 11:20:26.809171'),
+(43,'تویی محبوبم','جواد مقدم','Javad Moghadam - Toei Mahboobam (320).mp3','2024-11-17 09:39:48.122759',NULL,'2024-11-17 11:39:58.621532'),
+(44,'خدا مادرم را کجا میبرند','سید مهدی میرداماد','Mahdi Mirdamad - Khoda Madaram Ra Koja Mibarand (128).mp3','2024-11-17 09:42:44.153798',NULL,'2024-11-17 11:43:04.243519'),
+(45,'فقط حیدر امیرالمومنین است','نزار القطری','Nazar Ghatari - Ali Shah (320).mp3','2024-11-17 09:47:09.847109',NULL,'2024-11-17 11:47:32.328680');
+/*!40000 ALTER TABLE `nooha` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nooha_category`
+--
+
+DROP TABLE IF EXISTS `nooha_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nooha_category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `category_id` int NOT NULL,
+  `nooha_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_nooha_ca_category_58fca7aa` (`category_id`),
+  KEY `fk_nooha_ca_nooha_8c4e52f4` (`nooha_id`),
+  CONSTRAINT `fk_nooha_ca_category_58fca7aa` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_nooha_ca_nooha_8c4e52f4` FOREIGN KEY (`nooha_id`) REFERENCES `nooha` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nooha_category`
+--
+
+LOCK TABLES `nooha_category` WRITE;
+/*!40000 ALTER TABLE `nooha_category` DISABLE KEYS */;
+INSERT INTO `nooha_category` VALUES
+(2,1,5),
+(10,3,15),
+(11,4,16),
+(12,4,17),
+(13,4,18),
+(14,4,19),
+(15,4,20),
+(16,4,21),
+(17,5,22),
+(18,5,23),
+(19,5,24),
+(20,5,25),
+(21,5,26),
+(22,5,27),
+(26,6,28),
+(27,4,29),
+(28,4,30),
+(29,8,31),
+(30,8,32),
+(31,6,33),
+(32,8,33),
+(33,6,34),
+(34,9,34),
+(35,6,35),
+(40,3,36),
+(41,1,36),
+(64,4,4),
+(65,9,42),
+(66,8,42),
+(67,1,43),
+(68,3,43),
+(69,4,44),
+(70,5,45);
+/*!40000 ALTER TABLE `nooha_category` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-11-18 10:30:32
