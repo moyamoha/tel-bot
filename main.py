@@ -31,3 +31,12 @@ def create_app():
     return app
 
 app = create_app()
+
+@app.get('/report/')
+def get_report():
+    try:
+        with open('report.txt', 'r') as rf:
+            lines = [int(line.strip()) for line in rf.readlines()]
+            return list(set(lines))
+    except FileNotFoundError:
+        return []

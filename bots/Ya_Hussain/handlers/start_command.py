@@ -7,7 +7,7 @@ from models.category import Category
 from services.nooha_storage import NoohaStorage
 
 welcome_text = '''
-          سلام کاربر گرامی! به ربات @یا_حسین خوش آمدید. اینجا میتونید کلی نوحه و مداحی های متنوع و گوناگون دانلود کنید. لطفا یکی از مجموعه های زیر را انتخاب کنید   
+          سلام کاربر گرامی! به ربات نوحه و مداحی خوش آمدید. اینجا میتونید کلی نوحه و مداحی های متنوع و گوناگون دانلود کنید. لطفا یکی از مجموعه های زیر را انتخاب کنید   
         '''
 
 @inject
@@ -31,6 +31,8 @@ async def start(
                     await update.message.reply_document(document=url)
     else:
         try:
+            with open('report.txt', 'a') as rf:
+                rf.writelines([f"{update.effective_user.id}\n"])
             categories = await Category.all().order_by('title')
             keyboard = []
             for c in categories:
