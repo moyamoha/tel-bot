@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends
 import os
 from tortoise.contrib.fastapi import register_tortoise
 from fastapi.middleware.cors import CORSMiddleware
+from routers.blog_router import blog_router
 from routers.nooha_router import router as nooha_router
 from routers.category_router import category_router
 from security.api_key_auth import create_api_key_auth
@@ -21,10 +22,11 @@ def create_app():
     )
     app.include_router(nooha_router)
     app.include_router(category_router)
+    app.include_router(blog_router)
     register_tortoise(
         app,
         db_url=os.getenv('DB_URL'),
-        modules={"models": ["models.nooha", "models.category", "models.nooha_category"]},
+        modules={"models": ["models.nooha", "models.category", "models.nooha_category", "models.blog"]},
         generate_schemas=True,  # Set to True if you want Tortoise to create tables automatically
         add_exception_handlers=True,
     )
