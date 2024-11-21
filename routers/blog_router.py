@@ -13,13 +13,13 @@ async def get_blogs(page: int = 1, per_page: int = 10):
     return BlogListResponse(total_count=count, items=blogs)
 
 @blog_router.get('/{id}/', response_model=BlogResponse)
-async def get_blogs(id: int):
+async def get_blog(id: int):
     blog = await Blog.get(id=id)
     return blog
 
 
 @blog_router.post('/', response_model=BlogListResponse)
-async def get_blogs(blog: CreateBlog):
+async def create_blog(blog: CreateBlog):
     b = await Blog.create(**blog.model_dump())
     await b.save()
     return b
@@ -35,6 +35,6 @@ async def update_blog(id: int, blog: EditBlog):
     await b.save()
 
 @blog_router.delete('/{id}')
-async def remove_blob(id: int):
+async def remove_blog(id: int):
     blog = await Blog.get(id=id)
     await blog.delete()
