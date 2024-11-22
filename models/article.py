@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, StringConstraints
 from typing import Annotated, Optional, Union
 
 
-class Blog(Model):
+class Article(Model):
     id = fields.IntField(primary_key=True)
     title = fields.CharField(max_length=255)
     content = fields.TextField()
@@ -14,7 +14,7 @@ class Blog(Model):
     keywords = fields.TextField(null=True) # A group of words separated by |
 
 
-class BlogResponse(BaseModel):
+class ArticleResponse(BaseModel):
     id: int
     title: str
     content: str
@@ -23,18 +23,18 @@ class BlogResponse(BaseModel):
     keywords: list[str]
 
 
-class BlogListResponse(BaseModel):
+class ArticleListResponse(BaseModel):
     total_count: int
-    items: list[BlogResponse]
+    items: list[ArticleResponse]
 
 
-class CreateBlog(BaseModel):
+class CreateArticle(BaseModel):
     title: str = Field(min_length=10)
     content: str = Field(min_length=100)
     keywords: list[str]
 
 
-class EditBlog(BaseModel):
+class EditArticle(BaseModel):
     title: Optional[Annotated[str, StringConstraints(min_length=10)]] = None
     content: Optional[Annotated[str, StringConstraints(min_length=100)]] = None
     keywords: Optional[list[str]] = None
