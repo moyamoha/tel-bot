@@ -12,7 +12,7 @@ async def get_articles(page: int = 1, per_page: int = 10):
     articles = await articles_query.offset((page - 1) * per_page).limit(per_page)
     return bulk_article_orm_to_article_response(articles, count)
 
-@article_router.get('/{id}/', response_model=ArticleResponse)
+@article_router.get('/{id}', response_model=ArticleResponse)
 async def get_article(id: int):
     article = await Article.get(id=id)
     return article_orm_to_article_response(article)
