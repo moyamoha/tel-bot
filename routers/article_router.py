@@ -1,13 +1,14 @@
 from fastapi.routing import APIRouter
 from models.article import ArticleListResponse, Article, ArticleResponse, CreateArticle, EditArticle
 from utils.article_utils import article_orm_to_article_response, bulk_article_orm_to_article_response
+from tortoise.expressions import Q
 
 
 article_router = APIRouter(prefix='/articles', tags=['Articles'])
 
 @article_router.get('/', response_model=ArticleListResponse)
-async def get_articles(page: int = 1, per_page: int = 10):
-    articles_query = Article.all()
+async def get_articles(search: str = '', page: int = 1, per_page: int = 10):
+    articles_query = Article.filter(Q(title__icontains=search) | Q(content__icontains=search) | Q(keywords__icontains=search))
     count = await articles_query.count()
     articles = await articles_query.offset((page - 1) * per_page).limit(per_page)
     return bulk_article_orm_to_article_response(articles, count)
