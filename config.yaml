@@ -13,11 +13,3 @@ telegram:
     ya_hussain_313:
       token: ${TELEGRAM_BOTS_YA_HUSSAIN_313_TOKEN}
       username: ${TELEGRAM_BOTS_YA_HUSSAIN_313_USERNAME}
-azure:
-  blob_storage:
-    account_key: ${AZURE_STORAGE_ACCOUNT_KEY}
-    account_url: ${AZURE_STORAGE_ACCOUNT_URL}
-
-vimeo:
-  token: ${VIMEO_API_TOKEN}
-  base_url: ${VIMEO_API_BASE_URL}

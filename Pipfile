@@ -73,13 +73,9 @@ websockets = "==13.1"
 wrapt = "==1.16.0"
 yarl = "==1.17.1"
 dotmap = "*"
-python-box = "*"
-httpx = "*"
-azure-storage-blob = "*"
 
 [scripts]
 web = "uvicorn --host 0.0.0.0 --reload main:app"
 bot = "python start_bot.py"
-backup = "python backup.py"
 
 [dev-packages]
