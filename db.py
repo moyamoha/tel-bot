@@ -1,5 +1,4 @@
 from tortoise import Tortoise
-import asyncio
 from di_container import AppContainer
 from dependency_injector.wiring import inject, Provide
 from dotmap import DotMap

@@ -1,4 +1,3 @@
-import threading
 from typing import Final
 from bots.Ya_Hussain.bot import create_yahya_salimi_bot
 from db import init_db

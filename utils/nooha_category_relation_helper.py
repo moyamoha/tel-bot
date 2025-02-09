@@ -1,7 +1,6 @@
 from models.nooha_category import NoohaCategory
 from models.nooha import Nooha, NoohaResponse, NoohaListResponse
 from models.category import Category, CategoryResponse
-from typing import Sequence
 
 
 async def edit_nooha_categories(nooha: Nooha, categories: list[int] | None = None):

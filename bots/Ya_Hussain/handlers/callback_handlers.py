@@ -5,9 +5,6 @@ from di_container import AppContainer
 from models.category import Category
 from models.nooha import Nooha
 from dependency_injector.wiring import inject, Provide
-import re
-from services.nooha_storage import NoohaStorage
-
 
 
 @inject

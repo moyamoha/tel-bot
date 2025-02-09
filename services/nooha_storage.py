@@ -1,4 +1,4 @@
-from typing import BinaryIO, Final
+from typing import Final
 import boto3
 from fastapi import UploadFile
 from utils.str_utils import get_file_extension
