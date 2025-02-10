@@ -15,9 +15,9 @@ def create_app():
     app = FastAPI(dependencies=[Depends(auth)], docs_url='/')
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],        # Allow all origins
-        allow_credentials=False,      # Allow credentials (e.g., cookies, authorization headers)
-        allow_methods=["*"],         # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["*"],
         allow_headers=["*"],
     )
     app.include_router(nooha_router)
